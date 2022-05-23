@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="{{_res_path}}/relife/relife/relife.css" />
+  <link rel="shortcut icon" href="#" />
+</head>
+<style type="text/css">
+  .head_box {
+    background: url({{_res_path}}/genshin/logo/namecard/{{hd_bg}}.png) #f1efef;
+    background-position-x: 180px;
+    background-repeat: no-repeat;
+    background-size: auto 101%;
+  }
+</style>
+
+<body>
+  <div class="container" id="container">
+    <div class="head_box">
+      <div class="id_text">人生重开</div>
+      <h2 class="day_text">着垃圾人生一秒也不想待了</h2>
+    </div>
+    
+    <div class="data_box">
+      <div class="tab_lable">天赋</div>
+      <div class="list">
+        {{each lifeTalent item}}
+        <div class="item">
+          <div class="title">
+            <div class="text">{{item.name}}</div>
+            <div class="dec">{{item.description}}</div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="data_box">
+      <div class="tab_lable">{{nickname}}</div>
+      <div class="list">
+        {{each lifeData item}}
+        <div class="item">
+          <div class="title">
+            <div class="text">{{item.age}} <span class="rt">{{item.propertys}}</span></div>
+            <div class="dec">{{item.text}}</div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="logo">Created By Yunzai-Bot & Alcedo</div>
+  </div>
+</body>
+
+</html>

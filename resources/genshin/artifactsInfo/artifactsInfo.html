@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh" style="font-size: 110.4px;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="">
+  <title>圣遗物详情</title>
+  <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" type="text/css" href="{{_res_path}}/genshin/artifactsInfo/style.css?v=1.0" />
+  <!--    <link rel="stylesheet" type="text/css" href="./style.css?v=1.0" />-->
+  <link rel="preload" href="{{_res_path}}/font/tttgbnumber.ttf" as="font" />
+</head>
+
+<body>
+<div class="container" id="container" style="width: 480px">
+  <div class="detail detail--outside-app">
+    <div class="detail__body">
+      <div style="margin-top: 0.1rem">
+        <!--        <h1 class="detail__title">海染砗磲</h1>-->
+        <div class="detail__divider"></div>
+      </div>
+      <div class="detail__content--wrap">
+        <div class="detail__content">
+          <div class="yz-detail">
+            <div class="relic-describe">
+              <div class="relic-describe__top">
+                <div class="relic-describe__top--image">
+                  <img src="{{props.icon}}?x-oss-process=image/quality,q_75/resize,s_120" alt="">
+                </div>
+                <div class="relic-describe__top--title">{{props.title}}</div>
+              </div>
+              <div class="relic-describe__footer">
+                <div class="relic-describe__footer--list">
+                  {{each props.table item}}
+                  <div class="relic-describe__footer--item">
+                    <div class="relic-describe__footer--key">&nbsp;{{item.key}}</div>
+                    <div class="relic-describe__footer--value">{{item.value}}</div>
+                  </div>
+                  {{/each}}
+                  <div class="relic-describe__footer--item">
+                    <div class="relic-describe__footer--key">获取途径：</div>
+                    <div class="relic-describe__footer--value">
+                      <span id="yz-how-get"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {{@dataContent}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="logo">Created By Yunzai-Bot & Zolay-Poi</div>
+</div>
+
+<script>
+const yzHowGet = document.getElementById("yz-how-get");
+// 获取“获取途径”
+let obcTmplFl = document.querySelectorAll(".obc-tmpl__f-l");
+if (obcTmplFl) {
+  for (const item of obcTmplFl) {
+    if (item.innerText.trim().includes("获取途径：")) {
+      if (!yzHowGet.innerText && item.nextElementSibling && item.nextElementSibling.className === "obc-tmpl__rich-text") {
+        yzHowGet.innerText = item.nextElementSibling.innerText;
+      }
+      item.parentElement.outerHTML = "";
+    }
+  }
+}
+
+let partTitle = document.querySelectorAll(".detail .detail__body .detail__content .obc-tmpl .obc-tmpl__part > h2");
+if (partTitle) {
+  for (const item of partTitle) {
+    // 删除“其他”页签
+    if (item.innerText.trim() === "其他" || item.innerText.trim() === "套装属性") {
+      item.parentElement.parentElement.parentElement.outerHTML = "";
+    }
+    // 调整“装备描述”
+    if (item.innerText.trim() === "装备描述") {
+      item.parentElement.style.top = "-10px";
+      item.parentElement.style.borderRadius = "0 0 0.05rem 0.05rem";
+      item.parentElement.parentElement.nextElementSibling.children[0].style.borderRadius = "0.05rem 0.05rem 0 0";
+      item.outerHTML = "";
+    }
+    // 删除切换按钮
+    if (item.nextElementSibling && item.nextElementSibling.className === "obc-tmpl__switch-btn-list") {
+      item.nextElementSibling.outerHTML = "";
+    }
+  }
+}
+
+</script>
+
+</body>
+
+</html>
